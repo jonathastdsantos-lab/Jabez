@@ -9,7 +9,9 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 
-export default function LoginPage() {
+import { Suspense } from 'react'
+
+function LoginContent() {
   const searchParams = useSearchParams()
   const mode = searchParams.get('mode') || 'login'
   const isLogin = mode === 'login'
@@ -87,3 +89,12 @@ export default function LoginPage() {
     </div>
   )
 }
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
+      <LoginContent />
+    </Suspense>
+  )
+}
+
